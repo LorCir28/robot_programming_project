@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel -DCMAKE_INSTALL_PREFIX=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/install -G Unix Makefiles
