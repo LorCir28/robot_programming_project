@@ -10,6 +10,8 @@ find_package(OpenCV REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+  nav_msgs
+  tf
 #  genmsg
 )
 
@@ -55,7 +57,7 @@ catkin_package(
   INCLUDE_DIRS 
   "include/"
 #  LIBRARIES my_package
-   CATKIN_DEPENDS roscpp std_msgs
+   CATKIN_DEPENDS roscpp std_msgs nav_msgs tf
 #  DEPENDS system_lib
 )
 
