@@ -1,6 +1,7 @@
-#include "robot.h"
+#include "../include/robot.h"
 
 #include <opencv2/imgproc.hpp>
+
 
 Robot::Robot(float radius_, std::shared_ptr<World> w_, const Pose& pose_)
     : radius(radius_), WorldItem(w_, pose_), tv(0.0), rv(0.0) {}
@@ -26,3 +27,4 @@ void Robot::timeTick(float dt) {
   int int_radius = radius * world->i_res;
   if (!world->collides(ip, int_radius)) pose_in_parent = next_pose;
 }
+

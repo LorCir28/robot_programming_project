@@ -1,0 +1,8 @@
+prefix=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/install
+
+Name: my_package
+Description: Description of my_package
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: roscpp std_msgs

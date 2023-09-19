@@ -1,2 +1,3 @@
 # Hashes of file build rules.
+555d4485a009b39bd654d3f7a02bb837 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/share/roseus/ros/my_package/manifest.l
 a93221d82dee30752f6832eab99226eb CMakeFiles/clean_test_results
