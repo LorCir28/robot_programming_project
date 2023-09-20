@@ -19,16 +19,39 @@
 #include <jsoncpp/json/json.h>
 #include <string>
 
+#include <geometry_msgs/Twist.h>
+
+#include "lidar.h"
+#include "robot.h"
+#include "types.h"
+#include "world.h"
+
 // using namespace std;
 // using json = nlohmann::json;
 
 
 
+std::vector<int> vels;
 
+void callback(const geometry_msgs::Twist::ConstPtr& msg) {
+    double linear_vel = msg->linear.x;
+    double angular_vel = msg->angular.z;
+
+    ROS_INFO("Received cmd_vel: Linear=%f, Angular=%f", linear_vel, angular_vel);
+
+    std::vector<int> vel;
+    vel.push_back(linear_vel);
+    vel.push_back(angular_vel);
+
+    vels = vel;
+}
 
 
 int main(int argc, char** argv)
 {
+
+  World world; // to create the world
+
   // Specify the path to the JSON file
   const std::string jsonFilePath = "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/test_data/cappero_1r.json";
 
@@ -60,16 +83,23 @@ int main(int argc, char** argv)
   double initialLinearVelocity = jsonData["items"][0]["max_tv"].asDouble();
   double initialAngularVelocity = jsonData["items"][0]["max_rv"].asDouble();
 
-  // double initialX = 0;
-  // double initialY = 0;
-  // double initialTheta = 0;
-  // double initialLinearVelocity = 0;
-  // double initialAngularVelocity = 0;
+  double radius = jsonData["items"][0]["radius"].asDouble();
+
+
+  // std::shared_ptr<World>  world_pointer(&world, [](World*){ });   // is a lambda function
+  std::shared_ptr<World> world_pointer = std::make_shared<World>(world);
+
+  Pose robot_pose = Pose::Identity();
+  robot_pose.translation() = world.grid2world(Eigen::Vector2i(initialX, initialY));
+  robot_pose.linear() = Eigen::Rotation2Df(initialTheta).matrix();
+
+  Robot robot(radius, world_pointer, robot_pose);
 
 
   ros::init(argc, argv, "odometry_publisher");
   ros::NodeHandle nh;
   ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("/robot_0/odom", 10);
+  ros::Subscriber cmd_vel_sub = nh.subscribe("/robot0/cmd_vel", 10, callback);
 
   // Create an Odometry message
   nav_msgs::Odometry odom;
@@ -89,6 +119,13 @@ int main(int argc, char** argv)
 
   while (ros::ok())
   {
+      world.draw();
+      cv::waitKey(1);
+      world.timeTick(0.08);
+
+      robot.tv = vels[0];
+      robot.rv = vels[1];
+
       // Update the timestamp
       odom.header.stamp = ros::Time::now();
 

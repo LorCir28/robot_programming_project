@@ -68,18 +68,6 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -134,6 +122,18 @@ list_install_components:
 list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -977,21 +977,6 @@ test_node/fast:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/build
 .PHONY : test_node/fast
 
-# Convenience name for target.
-my_package/CMakeFiles/cmd_vel_sub.dir/rule:
-	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_package/CMakeFiles/cmd_vel_sub.dir/rule
-.PHONY : my_package/CMakeFiles/cmd_vel_sub.dir/rule
-
-# Convenience name for target.
-cmd_vel_sub: my_package/CMakeFiles/cmd_vel_sub.dir/rule
-
-.PHONY : cmd_vel_sub
-
-# fast build rule for target.
-cmd_vel_sub/fast:
-	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/build
-.PHONY : cmd_vel_sub/fast
-
 bin/cmd_vel_pub_node.o: bin/cmd_vel_pub_node.cpp.o
 
 .PHONY : bin/cmd_vel_pub_node.o
@@ -1018,33 +1003,6 @@ bin/cmd_vel_pub_node.s: bin/cmd_vel_pub_node.cpp.s
 bin/cmd_vel_pub_node.cpp.s:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_pub.dir/build.make my_package/CMakeFiles/cmd_vel_pub.dir/bin/cmd_vel_pub_node.cpp.s
 .PHONY : bin/cmd_vel_pub_node.cpp.s
-
-bin/cmd_vel_sub_node.o: bin/cmd_vel_sub_node.cpp.o
-
-.PHONY : bin/cmd_vel_sub_node.o
-
-# target to build an object file
-bin/cmd_vel_sub_node.cpp.o:
-	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/bin/cmd_vel_sub_node.cpp.o
-.PHONY : bin/cmd_vel_sub_node.cpp.o
-
-bin/cmd_vel_sub_node.i: bin/cmd_vel_sub_node.cpp.i
-
-.PHONY : bin/cmd_vel_sub_node.i
-
-# target to preprocess a source file
-bin/cmd_vel_sub_node.cpp.i:
-	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/bin/cmd_vel_sub_node.cpp.i
-.PHONY : bin/cmd_vel_sub_node.cpp.i
-
-bin/cmd_vel_sub_node.s: bin/cmd_vel_sub_node.cpp.s
-
-.PHONY : bin/cmd_vel_sub_node.s
-
-# target to generate assembly for a file
-bin/cmd_vel_sub_node.cpp.s:
-	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/bin/cmd_vel_sub_node.cpp.s
-.PHONY : bin/cmd_vel_sub_node.cpp.s
 
 bin/lidar_pub_node.o: bin/lidar_pub_node.cpp.o
 
@@ -1107,6 +1065,7 @@ src/lidar.o: src/lidar.cpp.o
 # target to build an object file
 src/lidar.cpp.o:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/my_package.dir/build.make my_package/CMakeFiles/my_package.dir/src/lidar.cpp.o
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/src/lidar.cpp.o
 .PHONY : src/lidar.cpp.o
 
 src/lidar.i: src/lidar.cpp.i
@@ -1116,6 +1075,7 @@ src/lidar.i: src/lidar.cpp.i
 # target to preprocess a source file
 src/lidar.cpp.i:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/my_package.dir/build.make my_package/CMakeFiles/my_package.dir/src/lidar.cpp.i
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/src/lidar.cpp.i
 .PHONY : src/lidar.cpp.i
 
 src/lidar.s: src/lidar.cpp.s
@@ -1125,6 +1085,7 @@ src/lidar.s: src/lidar.cpp.s
 # target to generate assembly for a file
 src/lidar.cpp.s:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/my_package.dir/build.make my_package/CMakeFiles/my_package.dir/src/lidar.cpp.s
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/src/lidar.cpp.s
 .PHONY : src/lidar.cpp.s
 
 src/robot.o: src/robot.cpp.o
@@ -1134,6 +1095,7 @@ src/robot.o: src/robot.cpp.o
 # target to build an object file
 src/robot.cpp.o:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/my_package.dir/build.make my_package/CMakeFiles/my_package.dir/src/robot.cpp.o
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/src/robot.cpp.o
 .PHONY : src/robot.cpp.o
 
 src/robot.i: src/robot.cpp.i
@@ -1143,6 +1105,7 @@ src/robot.i: src/robot.cpp.i
 # target to preprocess a source file
 src/robot.cpp.i:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/my_package.dir/build.make my_package/CMakeFiles/my_package.dir/src/robot.cpp.i
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/src/robot.cpp.i
 .PHONY : src/robot.cpp.i
 
 src/robot.s: src/robot.cpp.s
@@ -1152,6 +1115,7 @@ src/robot.s: src/robot.cpp.s
 # target to generate assembly for a file
 src/robot.cpp.s:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/my_package.dir/build.make my_package/CMakeFiles/my_package.dir/src/robot.cpp.s
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/src/robot.cpp.s
 .PHONY : src/robot.cpp.s
 
 src/world.o: src/world.cpp.o
@@ -1161,6 +1125,7 @@ src/world.o: src/world.cpp.o
 # target to build an object file
 src/world.cpp.o:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/my_package.dir/build.make my_package/CMakeFiles/my_package.dir/src/world.cpp.o
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/src/world.cpp.o
 .PHONY : src/world.cpp.o
 
 src/world.i: src/world.cpp.i
@@ -1170,6 +1135,7 @@ src/world.i: src/world.cpp.i
 # target to preprocess a source file
 src/world.cpp.i:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/my_package.dir/build.make my_package/CMakeFiles/my_package.dir/src/world.cpp.i
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/src/world.cpp.i
 .PHONY : src/world.cpp.i
 
 src/world.s: src/world.cpp.s
@@ -1179,6 +1145,7 @@ src/world.s: src/world.cpp.s
 # target to generate assembly for a file
 src/world.cpp.s:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/my_package.dir/build.make my_package/CMakeFiles/my_package.dir/src/world.cpp.s
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/src/world.cpp.s
 .PHONY : src/world.cpp.s
 
 # Help Target
@@ -1188,7 +1155,6 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... install"
 	@echo "... install/local"
 	@echo "... nav_msgs_generate_messages_eus"
 	@echo "... lidar_pub"
@@ -1247,14 +1213,11 @@ help:
 	@echo "... tf2_msgs_generate_messages_lisp"
 	@echo "... tf2_msgs_generate_messages_nodejs"
 	@echo "... test_node"
-	@echo "... cmd_vel_sub"
 	@echo "... list_install_components"
+	@echo "... install"
 	@echo "... bin/cmd_vel_pub_node.o"
 	@echo "... bin/cmd_vel_pub_node.i"
 	@echo "... bin/cmd_vel_pub_node.s"
-	@echo "... bin/cmd_vel_sub_node.o"
-	@echo "... bin/cmd_vel_sub_node.i"
-	@echo "... bin/cmd_vel_sub_node.s"
 	@echo "... bin/lidar_pub_node.o"
 	@echo "... bin/lidar_pub_node.i"
 	@echo "... bin/lidar_pub_node.s"

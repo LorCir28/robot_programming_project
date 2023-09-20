@@ -5,6 +5,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/bin/mrsim_node.cpp" "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package/CMakeFiles/test_node.dir/bin/mrsim_node.cpp.o"
+  "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/lidar.cpp" "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package/CMakeFiles/test_node.dir/src/lidar.cpp.o"
+  "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/robot.cpp" "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package/CMakeFiles/test_node.dir/src/robot.cpp.o"
+  "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/world.cpp" "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package/CMakeFiles/test_node.dir/src/world.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

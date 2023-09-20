@@ -986,19 +986,6 @@ test_node/fast:
 	$(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/build
 .PHONY : test_node/fast
 
-#=============================================================================
-# Target rules for targets named cmd_vel_sub
-
-# Build rule for target.
-cmd_vel_sub: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cmd_vel_sub
-.PHONY : cmd_vel_sub
-
-# fast build rule for target.
-cmd_vel_sub/fast:
-	$(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/build
-.PHONY : cmd_vel_sub/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1075,7 +1062,6 @@ help:
 	@echo "... tf2_msgs_generate_messages_lisp"
 	@echo "... tf2_msgs_generate_messages_nodejs"
 	@echo "... test_node"
-	@echo "... cmd_vel_sub"
 .PHONY : help
 
 

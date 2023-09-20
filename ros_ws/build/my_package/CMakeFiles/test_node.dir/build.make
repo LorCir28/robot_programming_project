@@ -70,14 +70,59 @@ my_package/CMakeFiles/test_node.dir/bin/mrsim_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_node.dir/bin/mrsim_node.cpp.s"
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/bin/mrsim_node.cpp -o CMakeFiles/test_node.dir/bin/mrsim_node.cpp.s
 
+my_package/CMakeFiles/test_node.dir/src/robot.cpp.o: my_package/CMakeFiles/test_node.dir/flags.make
+my_package/CMakeFiles/test_node.dir/src/robot.cpp.o: /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/robot.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object my_package/CMakeFiles/test_node.dir/src/robot.cpp.o"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_node.dir/src/robot.cpp.o -c /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/robot.cpp
+
+my_package/CMakeFiles/test_node.dir/src/robot.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_node.dir/src/robot.cpp.i"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/robot.cpp > CMakeFiles/test_node.dir/src/robot.cpp.i
+
+my_package/CMakeFiles/test_node.dir/src/robot.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_node.dir/src/robot.cpp.s"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/robot.cpp -o CMakeFiles/test_node.dir/src/robot.cpp.s
+
+my_package/CMakeFiles/test_node.dir/src/world.cpp.o: my_package/CMakeFiles/test_node.dir/flags.make
+my_package/CMakeFiles/test_node.dir/src/world.cpp.o: /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/world.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object my_package/CMakeFiles/test_node.dir/src/world.cpp.o"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_node.dir/src/world.cpp.o -c /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/world.cpp
+
+my_package/CMakeFiles/test_node.dir/src/world.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_node.dir/src/world.cpp.i"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/world.cpp > CMakeFiles/test_node.dir/src/world.cpp.i
+
+my_package/CMakeFiles/test_node.dir/src/world.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_node.dir/src/world.cpp.s"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/world.cpp -o CMakeFiles/test_node.dir/src/world.cpp.s
+
+my_package/CMakeFiles/test_node.dir/src/lidar.cpp.o: my_package/CMakeFiles/test_node.dir/flags.make
+my_package/CMakeFiles/test_node.dir/src/lidar.cpp.o: /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/lidar.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object my_package/CMakeFiles/test_node.dir/src/lidar.cpp.o"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_node.dir/src/lidar.cpp.o -c /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/lidar.cpp
+
+my_package/CMakeFiles/test_node.dir/src/lidar.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_node.dir/src/lidar.cpp.i"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/lidar.cpp > CMakeFiles/test_node.dir/src/lidar.cpp.i
+
+my_package/CMakeFiles/test_node.dir/src/lidar.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_node.dir/src/lidar.cpp.s"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/src/lidar.cpp -o CMakeFiles/test_node.dir/src/lidar.cpp.s
+
 # Object files for target test_node
 test_node_OBJECTS = \
-"CMakeFiles/test_node.dir/bin/mrsim_node.cpp.o"
+"CMakeFiles/test_node.dir/bin/mrsim_node.cpp.o" \
+"CMakeFiles/test_node.dir/src/robot.cpp.o" \
+"CMakeFiles/test_node.dir/src/world.cpp.o" \
+"CMakeFiles/test_node.dir/src/lidar.cpp.o"
 
 # External object files for target test_node
 test_node_EXTERNAL_OBJECTS =
 
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: my_package/CMakeFiles/test_node.dir/bin/mrsim_node.cpp.o
+/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: my_package/CMakeFiles/test_node.dir/src/robot.cpp.o
+/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: my_package/CMakeFiles/test_node.dir/src/world.cpp.o
+/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: my_package/CMakeFiles/test_node.dir/src/lidar.cpp.o
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: my_package/CMakeFiles/test_node.dir/build.make
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.4.2.0
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.4.2.0
@@ -151,7 +196,7 @@ test_node_EXTERNAL_OBJECTS =
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.4.2.0
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libopencv_core.so.4.2.0
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: my_package/CMakeFiles/test_node.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node"
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_node.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

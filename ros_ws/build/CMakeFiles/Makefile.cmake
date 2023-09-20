@@ -318,5 +318,4 @@ set(CMAKE_DEPEND_INFO_FILES
   "my_package/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/DependInfo.cmake"
   "my_package/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/DependInfo.cmake"
   "my_package/CMakeFiles/test_node.dir/DependInfo.cmake"
-  "my_package/CMakeFiles/cmd_vel_sub.dir/DependInfo.cmake"
   )
