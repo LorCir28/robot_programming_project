@@ -130,6 +130,7 @@ test_node_EXTERNAL_OBJECTS =
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
+/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.4.2.0
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.4.2.0
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node: /usr/lib/x86_64-linux-gnu/libopencv_plot.so.4.2.0

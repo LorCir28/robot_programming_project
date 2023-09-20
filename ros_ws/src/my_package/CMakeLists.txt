@@ -6,13 +6,21 @@ project(my_package)
 
 find_package(Eigen3 REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
+# find_package(jsoncpp REQUIRED)
+# find_package(nlohmann_json REQUIRED)
+
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   nav_msgs
   tf
+  jsoncpp
 )
+
+
+# set(jsoncpp_DIR /usr/lib/x86_64-linux-gnu/cmake/jsoncpp/jsoncppConfig.cmake)
 
 # include_directories(${catkin_INCLUDE_DIRS})
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -63,6 +71,7 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  # ${JSONCPP_INCLUDE_DIRS}
 )
 
 add_library(my_package SHARED src/robot.cpp src/world.cpp src/lidar.cpp)
@@ -95,6 +104,7 @@ target_include_directories(test_node PUBLIC
     include 
     ${OpenCV_INCLUDE_DIRS}
     ${catkin_INCLUDE_DIRS}
+    # ${JSONCPP_INCLUDE_DIRS}
 )
 
 # target_link_libraries(robot
@@ -105,6 +115,10 @@ target_link_libraries(test_node PUBLIC
     ${OpenCV_LIBRARIES} 
     Eigen3::Eigen
     ${catkin_LIBRARIES}
+    ${Boost_LIBRARIES}
+    # ${JSONCPP_LIBRARIES}
+    # PRIVATE nlohmann_json::nlohmann_json
+    jsoncpp
 )
 
 target_link_libraries(cmd_vel_pub ${catkin_LIBRARIES})
@@ -112,6 +126,7 @@ target_link_libraries(cmd_vel_pub ${catkin_LIBRARIES})
 target_link_libraries(cmd_vel_sub ${catkin_LIBRARIES})
 
 target_link_libraries(lidar_pub ${catkin_LIBRARIES})
+
 
 # add_executable(robot src/robot.cpp)
 #     target_include_directories(robot PUBLIC 

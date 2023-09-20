@@ -2,110 +2,107 @@
 
 #include <opencv2/highgui.hpp>
 
-// int main(int argc, char** argv) {
-//   ros::init(argc, argv, "mrsim_node");
-//   ros::NodeHandle nh("/");
-
-//   // Load the configuration file and initialize the simulator
-
-//   while (ros::ok()) {
-//     // run a simulation iteration
-//     // visualize the simulation
-//     cv::waitKey(100);
-//     ros::spinOnce();
-//   }
-
-//   return 0;
-// }
 
 
 
-#include "ros/ros.h"
-// #include "std_msgs/String.h"
-#include <tf/transform_broadcaster.h>
+
+
+
+
 #include <nav_msgs/Odometry.h>
+#include <tf/transform_broadcaster.h>
+// #include <nlohmann/json.hpp>
+#include <fstream>
+// #include <json/value.h>
+#include <iostream>
+#include <jsoncpp/json/value.h>
+#include <jsoncpp/json/json.h>
+#include <string>
+
+// using namespace std;
+// using json = nlohmann::json;
 
 
-// publisher
-int main(int argc, char** argv) {
-  ros::init(argc, argv, "Publisher");
-  ros::NodeHandle nh;
 
-  ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("robot_0/odom", 50);
-  tf::TransformBroadcaster odom_broadcaster;
 
-  double x = 0.0;
-  double y = 0.0;
-  double th = 0.0;
 
-  double vx = 0.1;
-  double vy = -0.1;
-  double vth = 0.1;
 
-  ros::Time current_time, last_time;
-  current_time = ros::Time::now();
-  last_time = ros::Time::now();
+int main(int argc, char** argv)
+{
+  // Specify the path to the JSON file
+  const std::string jsonFilePath = "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/test_data/cappero_1r.json";
 
-  ros::Rate r(1.0);
+  // Read the JSON file
+  std::ifstream jsonFile(jsonFilePath);
 
-  while(ros::ok()) {
-    double dt = (current_time - last_time).toSec();
-    double delta_x = (vx * cos(th) - vy * sin(th)) * dt;
-    double delta_y = (vx * sin(th) + vy * cos(th)) * dt;
-    double delta_th = vth * dt;
-
-    x += delta_x;
-    y += delta_y;
-    th += delta_th;
-
-    geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(th);
-
-    geometry_msgs::TransformStamped odom_trans;
-    odom_trans.header.stamp = current_time;
-    odom_trans.header.frame_id = "odom";
-    odom_trans.child_frame_id = "base_link";
-
-    odom_trans.transform.translation.x = x;
-    odom_trans.transform.translation.y = y;
-    odom_trans.transform.translation.z = 0.0;
-    odom_trans.transform.rotation = odom_quat;
-
-    odom_broadcaster.sendTransform(odom_trans);
-
-        nav_msgs::Odometry odom;
-    odom.header.stamp = current_time;
-    odom.header.frame_id = "odom";
-
-    //set the position
-    odom.pose.pose.position.x = x;
-    odom.pose.pose.position.y = y;
-    odom.pose.pose.position.z = 0.0;
-    odom.pose.pose.orientation = odom_quat;
-
-    //set the velocity
-    odom.child_frame_id = "base_link";
-    odom.twist.twist.linear.x = vx;
-    odom.twist.twist.linear.y = vy;
-    odom.twist.twist.angular.z = vth;
-
-    //publish the message
-    odom_pub.publish(odom);
-
-    last_time = current_time;
-    r.sleep();
+  // Check if the file is opened successfully
+  if (!jsonFile.is_open()) {
+      ROS_ERROR("Failed to open JSON file.");
+      return 1;
   }
 
 
-  // ros::Rate loop_rate(1);
+  // Parse the JSON data
+  Json::CharReaderBuilder builder;
+  Json::CharReader* reader(builder.newCharReader());
+  Json::Value jsonData;
 
-  // while(ros::ok()) {
-  //   std_msgs::String msg;
-  //   msg.data = "Hello World!!";
+  std::string errors;
+  Json::parseFromStream(builder, jsonFile, &jsonData, &errors);
 
-  //   pub.publish(msg);
-  //   ros::spinOnce();
-  //   loop_rate.sleep();
-  // }
-  
+  // Close the file
+  jsonFile.close();
+
+  // Extract initial odometry data from the JSON object
+  double initialX = jsonData["items"][0]["pose"][0].asDouble();
+  double initialY = jsonData["items"][0]["pose"][1].asDouble();
+  double initialTheta = jsonData["items"][0]["pose"][2].asDouble();
+  double initialLinearVelocity = jsonData["items"][0]["max_tv"].asDouble();
+  double initialAngularVelocity = jsonData["items"][0]["max_rv"].asDouble();
+
+  // double initialX = 0;
+  // double initialY = 0;
+  // double initialTheta = 0;
+  // double initialLinearVelocity = 0;
+  // double initialAngularVelocity = 0;
+
+
+  ros::init(argc, argv, "odometry_publisher");
+  ros::NodeHandle nh;
+  ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("/robot_0/odom", 10);
+
+  // Create an Odometry message
+  nav_msgs::Odometry odom;
+  odom.header.frame_id = "odom";
+  odom.child_frame_id = "base_link";
+
+  // Set the initial pose and velocity using data from JSON
+  odom.pose.pose.position.x = initialX;
+  odom.pose.pose.position.y = initialY;
+  odom.pose.pose.orientation = tf::createQuaternionMsgFromYaw(initialTheta);
+
+  odom.twist.twist.linear.x = initialLinearVelocity;
+  odom.twist.twist.angular.z = initialAngularVelocity;
+
+
+  ros::Rate loop_rate(10);  // Publish at a rate of 10 Hz
+
+  while (ros::ok())
+  {
+      // Update the timestamp
+      odom.header.stamp = ros::Time::now();
+
+      // Publish the Odometry message
+      odom_pub.publish(odom);
+
+      ros::spinOnce();
+      loop_rate.sleep();
+  }
+
   return 0;
+
 }
+
+
+
+
