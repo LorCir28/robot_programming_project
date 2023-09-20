@@ -82,6 +82,7 @@ target_link_libraries(my_package PUBLIC ${OpenCV_LIBRARIES} Eigen3::Eigen)
 add_executable(test_node bin/mrsim_node.cpp)
 add_executable(cmd_vel_pub bin/cmd_vel_pub_node.cpp)
 add_executable(cmd_vel_sub bin/cmd_vel_sub_node.cpp)
+add_executable(lidar_pub bin/lidar_pub_node.cpp)
 
 
 # set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
@@ -109,6 +110,8 @@ target_link_libraries(test_node PUBLIC
 target_link_libraries(cmd_vel_pub ${catkin_LIBRARIES})
 
 target_link_libraries(cmd_vel_sub ${catkin_LIBRARIES})
+
+target_link_libraries(lidar_pub ${catkin_LIBRARIES})
 
 # add_executable(robot src/robot.cpp)
 #     target_include_directories(robot PUBLIC 

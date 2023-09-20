@@ -298,6 +298,19 @@ nav_msgs_generate_messages_eus/fast:
 .PHONY : nav_msgs_generate_messages_eus/fast
 
 #=============================================================================
+# Target rules for targets named lidar_pub
+
+# Build rule for target.
+lidar_pub: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lidar_pub
+.PHONY : lidar_pub
+
+# fast build rule for target.
+lidar_pub/fast:
+	$(MAKE) -f my_package/CMakeFiles/lidar_pub.dir/build.make my_package/CMakeFiles/lidar_pub.dir/build
+.PHONY : lidar_pub/fast
+
+#=============================================================================
 # Target rules for targets named geometry_msgs_generate_messages_eus
 
 # Build rule for target.
@@ -1009,6 +1022,7 @@ help:
 	@echo "... gtest_main"
 	@echo "... gtest"
 	@echo "... nav_msgs_generate_messages_eus"
+	@echo "... lidar_pub"
 	@echo "... geometry_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"

@@ -68,6 +68,18 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -123,18 +135,6 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
 # The main all target
 all: cmake_check_build_system
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/CMakeFiles /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package/CMakeFiles/progress.marks
@@ -181,6 +181,21 @@ nav_msgs_generate_messages_eus: my_package/CMakeFiles/nav_msgs_generate_messages
 nav_msgs_generate_messages_eus/fast:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
 .PHONY : nav_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+my_package/CMakeFiles/lidar_pub.dir/rule:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_package/CMakeFiles/lidar_pub.dir/rule
+.PHONY : my_package/CMakeFiles/lidar_pub.dir/rule
+
+# Convenience name for target.
+lidar_pub: my_package/CMakeFiles/lidar_pub.dir/rule
+
+.PHONY : lidar_pub
+
+# fast build rule for target.
+lidar_pub/fast:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/lidar_pub.dir/build.make my_package/CMakeFiles/lidar_pub.dir/build
+.PHONY : lidar_pub/fast
 
 # Convenience name for target.
 my_package/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
@@ -1031,6 +1046,33 @@ bin/cmd_vel_sub_node.cpp.s:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/bin/cmd_vel_sub_node.cpp.s
 .PHONY : bin/cmd_vel_sub_node.cpp.s
 
+bin/lidar_pub_node.o: bin/lidar_pub_node.cpp.o
+
+.PHONY : bin/lidar_pub_node.o
+
+# target to build an object file
+bin/lidar_pub_node.cpp.o:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/lidar_pub.dir/build.make my_package/CMakeFiles/lidar_pub.dir/bin/lidar_pub_node.cpp.o
+.PHONY : bin/lidar_pub_node.cpp.o
+
+bin/lidar_pub_node.i: bin/lidar_pub_node.cpp.i
+
+.PHONY : bin/lidar_pub_node.i
+
+# target to preprocess a source file
+bin/lidar_pub_node.cpp.i:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/lidar_pub.dir/build.make my_package/CMakeFiles/lidar_pub.dir/bin/lidar_pub_node.cpp.i
+.PHONY : bin/lidar_pub_node.cpp.i
+
+bin/lidar_pub_node.s: bin/lidar_pub_node.cpp.s
+
+.PHONY : bin/lidar_pub_node.s
+
+# target to generate assembly for a file
+bin/lidar_pub_node.cpp.s:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/lidar_pub.dir/build.make my_package/CMakeFiles/lidar_pub.dir/bin/lidar_pub_node.cpp.s
+.PHONY : bin/lidar_pub_node.cpp.s
+
 bin/mrsim_node.o: bin/mrsim_node.cpp.o
 
 .PHONY : bin/mrsim_node.o
@@ -1146,8 +1188,10 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
+	@echo "... install"
 	@echo "... install/local"
 	@echo "... nav_msgs_generate_messages_eus"
+	@echo "... lidar_pub"
 	@echo "... geometry_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
@@ -1205,13 +1249,15 @@ help:
 	@echo "... test_node"
 	@echo "... cmd_vel_sub"
 	@echo "... list_install_components"
-	@echo "... install"
 	@echo "... bin/cmd_vel_pub_node.o"
 	@echo "... bin/cmd_vel_pub_node.i"
 	@echo "... bin/cmd_vel_pub_node.s"
 	@echo "... bin/cmd_vel_sub_node.o"
 	@echo "... bin/cmd_vel_sub_node.i"
 	@echo "... bin/cmd_vel_sub_node.s"
+	@echo "... bin/lidar_pub_node.o"
+	@echo "... bin/lidar_pub_node.i"
+	@echo "... bin/lidar_pub_node.s"
 	@echo "... bin/mrsim_node.o"
 	@echo "... bin/mrsim_node.i"
 	@echo "... bin/mrsim_node.s"
