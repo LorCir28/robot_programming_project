@@ -31,7 +31,8 @@
 
 
 
-std::vector<int> vels;
+// std::vector<int> vels;
+double vels[2];
 
 void callback(const geometry_msgs::Twist::ConstPtr& msg) {
     double linear_vel = msg->linear.x;
@@ -39,11 +40,17 @@ void callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
     ROS_INFO("Received cmd_vel: Linear=%f, Angular=%f", linear_vel, angular_vel);
 
-    std::vector<int> vel;
-    vel.push_back(linear_vel);
-    vel.push_back(angular_vel);
+    // std::vector<int> vel;
+    // vel.push_back(linear_vel);
+    // vel.push_back(angular_vel);
 
-    vels = vel;
+    // vels = vel;
+
+    vels[0] = linear_vel;
+    vels[1] = angular_vel;
+
+    ROS_INFO("Received cmd_vel_from_vector: Linear=%f, Angular=%f", vels[0], vels[1]);
+
 }
 
 
@@ -99,7 +106,7 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "odometry_publisher");
   ros::NodeHandle nh;
   ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("/robot_0/odom", 10);
-  ros::Subscriber cmd_vel_sub = nh.subscribe("/robot0/cmd_vel", 10, callback);
+  ros::Subscriber cmd_vel_sub = nh.subscribe("/robot_0/cmd_vel", 10, callback);
 
   // Create an Odometry message
   nav_msgs::Odometry odom;
@@ -119,7 +126,7 @@ int main(int argc, char** argv)
 
   while (ros::ok())
   {
-      world.draw();
+      // world.draw();
       cv::waitKey(1);
       world.timeTick(0.08);
 

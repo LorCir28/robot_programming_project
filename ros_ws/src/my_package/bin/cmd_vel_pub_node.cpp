@@ -8,7 +8,7 @@ int main(int argc, char** argv)
     ros::NodeHandle nh;
 
     // Create a publisher for the cmd_vel topic
-    ros::Publisher cmd_vel_pub = nh.advertise<geometry_msgs::Twist>("/robot0/cmd_vel", 10);
+    ros::Publisher cmd_vel_pub = nh.advertise<geometry_msgs::Twist>("/robot_0/cmd_vel", 10);
 
     // Create a Twist message with desired linear and angular velocities
     geometry_msgs::Twist cmd_vel_msg;
