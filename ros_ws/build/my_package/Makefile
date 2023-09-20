@@ -168,6 +168,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
+.PHONY : my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+nav_msgs_generate_messages_eus: my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
+
+.PHONY : nav_msgs_generate_messages_eus
+
+# fast build rule for target.
+nav_msgs_generate_messages_eus/fast:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
+.PHONY : nav_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
 my_package/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_package/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
 .PHONY : my_package/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
@@ -286,21 +301,6 @@ rosgraph_msgs_generate_messages_eus: my_package/CMakeFiles/rosgraph_msgs_generat
 rosgraph_msgs_generate_messages_eus/fast:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make my_package/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
-	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
-.PHONY : my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_eus: my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
-
-.PHONY : nav_msgs_generate_messages_eus
-
-# fast build rule for target.
-nav_msgs_generate_messages_eus/fast:
-	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
-.PHONY : nav_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 my_package/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
@@ -962,6 +962,21 @@ test_node/fast:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/build
 .PHONY : test_node/fast
 
+# Convenience name for target.
+my_package/CMakeFiles/cmd_vel_sub.dir/rule:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_package/CMakeFiles/cmd_vel_sub.dir/rule
+.PHONY : my_package/CMakeFiles/cmd_vel_sub.dir/rule
+
+# Convenience name for target.
+cmd_vel_sub: my_package/CMakeFiles/cmd_vel_sub.dir/rule
+
+.PHONY : cmd_vel_sub
+
+# fast build rule for target.
+cmd_vel_sub/fast:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/build
+.PHONY : cmd_vel_sub/fast
+
 bin/cmd_vel_pub_node.o: bin/cmd_vel_pub_node.cpp.o
 
 .PHONY : bin/cmd_vel_pub_node.o
@@ -988,6 +1003,33 @@ bin/cmd_vel_pub_node.s: bin/cmd_vel_pub_node.cpp.s
 bin/cmd_vel_pub_node.cpp.s:
 	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_pub.dir/build.make my_package/CMakeFiles/cmd_vel_pub.dir/bin/cmd_vel_pub_node.cpp.s
 .PHONY : bin/cmd_vel_pub_node.cpp.s
+
+bin/cmd_vel_sub_node.o: bin/cmd_vel_sub_node.cpp.o
+
+.PHONY : bin/cmd_vel_sub_node.o
+
+# target to build an object file
+bin/cmd_vel_sub_node.cpp.o:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/bin/cmd_vel_sub_node.cpp.o
+.PHONY : bin/cmd_vel_sub_node.cpp.o
+
+bin/cmd_vel_sub_node.i: bin/cmd_vel_sub_node.cpp.i
+
+.PHONY : bin/cmd_vel_sub_node.i
+
+# target to preprocess a source file
+bin/cmd_vel_sub_node.cpp.i:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/bin/cmd_vel_sub_node.cpp.i
+.PHONY : bin/cmd_vel_sub_node.cpp.i
+
+bin/cmd_vel_sub_node.s: bin/cmd_vel_sub_node.cpp.s
+
+.PHONY : bin/cmd_vel_sub_node.s
+
+# target to generate assembly for a file
+bin/cmd_vel_sub_node.cpp.s:
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/bin/cmd_vel_sub_node.cpp.s
+.PHONY : bin/cmd_vel_sub_node.cpp.s
 
 bin/mrsim_node.o: bin/mrsim_node.cpp.o
 
@@ -1104,6 +1146,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
+	@echo "... install/local"
+	@echo "... nav_msgs_generate_messages_eus"
 	@echo "... geometry_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
@@ -1112,8 +1156,6 @@ help:
 	@echo "... nav_msgs_generate_messages_lisp"
 	@echo "... nav_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... nav_msgs_generate_messages_eus"
-	@echo "... install/local"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... sensor_msgs_generate_messages_py"
@@ -1161,11 +1203,15 @@ help:
 	@echo "... tf2_msgs_generate_messages_lisp"
 	@echo "... tf2_msgs_generate_messages_nodejs"
 	@echo "... test_node"
+	@echo "... cmd_vel_sub"
 	@echo "... list_install_components"
 	@echo "... install"
 	@echo "... bin/cmd_vel_pub_node.o"
 	@echo "... bin/cmd_vel_pub_node.i"
 	@echo "... bin/cmd_vel_pub_node.s"
+	@echo "... bin/cmd_vel_sub_node.o"
+	@echo "... bin/cmd_vel_sub_node.i"
+	@echo "... bin/cmd_vel_sub_node.s"
 	@echo "... bin/mrsim_node.o"
 	@echo "... bin/mrsim_node.i"
 	@echo "... bin/mrsim_node.s"

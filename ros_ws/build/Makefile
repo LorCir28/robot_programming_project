@@ -285,6 +285,19 @@ gtest/fast:
 .PHONY : gtest/fast
 
 #=============================================================================
+# Target rules for targets named nav_msgs_generate_messages_eus
+
+# Build rule for target.
+nav_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_eus
+.PHONY : nav_msgs_generate_messages_eus
+
+# fast build rule for target.
+nav_msgs_generate_messages_eus/fast:
+	$(MAKE) -f my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
+.PHONY : nav_msgs_generate_messages_eus/fast
+
+#=============================================================================
 # Target rules for targets named geometry_msgs_generate_messages_eus
 
 # Build rule for target.
@@ -387,19 +400,6 @@ rosgraph_msgs_generate_messages_eus: cmake_check_build_system
 rosgraph_msgs_generate_messages_eus/fast:
 	$(MAKE) -f my_package/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make my_package/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named nav_msgs_generate_messages_eus
-
-# Build rule for target.
-nav_msgs_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_eus
-.PHONY : nav_msgs_generate_messages_eus
-
-# fast build rule for target.
-nav_msgs_generate_messages_eus/fast:
-	$(MAKE) -f my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make my_package/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
-.PHONY : nav_msgs_generate_messages_eus/fast
 
 #=============================================================================
 # Target rules for targets named roscpp_generate_messages_cpp
@@ -973,6 +973,19 @@ test_node/fast:
 	$(MAKE) -f my_package/CMakeFiles/test_node.dir/build.make my_package/CMakeFiles/test_node.dir/build
 .PHONY : test_node/fast
 
+#=============================================================================
+# Target rules for targets named cmd_vel_sub
+
+# Build rule for target.
+cmd_vel_sub: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cmd_vel_sub
+.PHONY : cmd_vel_sub
+
+# fast build rule for target.
+cmd_vel_sub/fast:
+	$(MAKE) -f my_package/CMakeFiles/cmd_vel_sub.dir/build.make my_package/CMakeFiles/cmd_vel_sub.dir/build
+.PHONY : cmd_vel_sub/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -995,6 +1008,7 @@ help:
 	@echo "... gmock"
 	@echo "... gtest_main"
 	@echo "... gtest"
+	@echo "... nav_msgs_generate_messages_eus"
 	@echo "... geometry_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
@@ -1003,7 +1017,6 @@ help:
 	@echo "... nav_msgs_generate_messages_lisp"
 	@echo "... nav_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... nav_msgs_generate_messages_eus"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... sensor_msgs_generate_messages_py"
@@ -1048,6 +1061,7 @@ help:
 	@echo "... tf2_msgs_generate_messages_lisp"
 	@echo "... tf2_msgs_generate_messages_nodejs"
 	@echo "... test_node"
+	@echo "... cmd_vel_sub"
 .PHONY : help
 
 
