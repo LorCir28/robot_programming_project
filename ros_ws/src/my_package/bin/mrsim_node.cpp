@@ -49,7 +49,7 @@ void callback(const geometry_msgs::Twist::ConstPtr& msg) {
     vels[0] = linear_vel;
     vels[1] = angular_vel;
 
-    ROS_INFO("Received cmd_vel_from_vector: Linear=%f, Angular=%f", vels[0], vels[1]);
+    // ROS_INFO("Received cmd_vel_from_vector: Linear=%f, Angular=%f", vels[0], vels[1]);
 
 }
 
@@ -88,8 +88,10 @@ int main(int argc, char** argv)
   double initialX = jsonData["items"][0]["pose"][0].asDouble();
   double initialY = jsonData["items"][0]["pose"][1].asDouble();
   double initialTheta = jsonData["items"][0]["pose"][2].asDouble();
-  double initialLinearVelocity = jsonData["items"][0]["max_tv"].asDouble();
-  double initialAngularVelocity = jsonData["items"][0]["max_rv"].asDouble();
+//   double initialLinearVelocity = jsonData["items"][0]["max_tv"].asDouble();
+//   double initialAngularVelocity = jsonData["items"][0]["max_rv"].asDouble();
+  double initialLinearVelocity = 0;
+  double initialAngularVelocity = 0;
 
   double radius = jsonData["items"][0]["radius"].asDouble();
 
@@ -136,11 +138,12 @@ int main(int argc, char** argv)
 
   while (ros::ok())
   {
+      ros::spinOnce();
 
       robot->tv = vels[0];
       robot->rv = vels[1];
 
-      sleep(0.01);
+    //   sleep(0.01);
 
       world.timeTick(0.08);
 
