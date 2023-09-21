@@ -162,6 +162,18 @@ int main(int argc, char** argv)
       // Update the timestamp
       odom.header.stamp = ros::Time::now();
 
+    // to upgrade the odometry of the robot
+      odom.pose.pose.position.x = robot->poseInWorld().translation().x();
+      odom.pose.pose.position.y = robot->poseInWorld().translation().y();
+
+      Eigen::Rotation2Df rotation(robot->poseInWorld().linear());
+      float theta = rotation.angle();
+
+      odom.pose.pose.orientation = tf::createQuaternionMsgFromYaw(theta);
+
+      odom.twist.twist.linear.x = robot->tv;
+      odom.twist.twist.angular.z = robot->rv;
+
       // Publish the Odometry message
       odom_pub.publish(odom);
 
