@@ -93,14 +93,14 @@ int main(int argc, char** argv)
   double radius = jsonData["items"][0]["radius"].asDouble();
 
 
-  // std::shared_ptr<World>  world_pointer(&world, [](World*){ });   // is a lambda function
-  std::shared_ptr<World> world_pointer = std::make_shared<World>(world);
+  std::shared_ptr<World>  world_pointer(&world, [](World*){ });   // is a lambda function
+//   std::shared_ptr<World> world_pointer = std::make_shared<World>(world);
 
   Pose robot_pose = Pose::Identity();
   robot_pose.translation() = world.grid2world(Eigen::Vector2i(initialX, initialY));
   robot_pose.linear() = Eigen::Rotation2Df(initialTheta).matrix();
 
-  Robot robot(radius, world_pointer, robot_pose);
+  Robot* robot = new Robot(radius, world_pointer, robot_pose);
 
 
   ros::init(argc, argv, "odometry_publisher");
@@ -128,14 +128,16 @@ int main(int argc, char** argv)
   std::string map_path = jsonData["map"].asString();
   world.loadFromImage("/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/test_data/" + map_path);      // to load the map image
 
+//   std::cout << "ciaooooo" << world._items.size();
+
   while (ros::ok())
   {
       world.draw();
       cv::waitKey(1);
       world.timeTick(0.08);
 
-      robot.tv = vels[0];
-      robot.rv = vels[1];
+      robot->tv = vels[0];
+      robot->rv = vels[1];
 
       // Update the timestamp
       odom.header.stamp = ros::Time::now();

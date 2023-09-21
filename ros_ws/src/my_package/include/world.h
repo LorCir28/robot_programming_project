@@ -48,7 +48,7 @@ class World {
 
   cv::Mat display_image;
 
- protected:
+//  protected:
   std::vector<uint8_t> _grid;
 
   std::vector<WorldItem*> _items;
