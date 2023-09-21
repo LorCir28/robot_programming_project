@@ -54,6 +54,7 @@ void callback(const geometry_msgs::Twist::ConstPtr& msg) {
 }
 
 
+
 int main(int argc, char** argv)
 {
 
@@ -126,18 +127,37 @@ int main(int argc, char** argv)
 
 
   std::string map_path = jsonData["map"].asString();
-  world.loadFromImage("/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/test_data/" + map_path);      // to load the map image
+  world.loadFromImage("/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/test_data/" + map_path); // to load the map image
 
 //   std::cout << "ciaooooo" << world._items.size();
 
+  world.draw();
+  cv::waitKey(1);
+
   while (ros::ok())
   {
-      world.draw();
-      cv::waitKey(1);
-      world.timeTick(0.08);
 
       robot->tv = vels[0];
       robot->rv = vels[1];
+
+      sleep(0.01);
+
+      world.timeTick(0.08);
+
+      world.draw();
+      cv::waitKey(1);
+
+    //   robot->tv = 0;
+    //   robot->rv = 0;
+
+    //   std::cout << vels[0] << std::endl;
+
+      sleep(0.01);
+
+
+
+
+    //   std::cout << robot->tv << std::endl;
 
       // Update the timestamp
       odom.header.stamp = ros::Time::now();
