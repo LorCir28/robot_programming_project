@@ -53,6 +53,23 @@ CMAKE_BINARY_DIR = /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build
 # Include the progress variables for this target.
 include my_package/CMakeFiles/my_package_generate_messages_py.dir/progress.make
 
+my_package/CMakeFiles/my_package_generate_messages_py: /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg/_Num.py
+my_package/CMakeFiles/my_package_generate_messages_py: /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg/__init__.py
+
+
+/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg/_Num.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg/_Num.py: /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/msg/Num.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG my_package/Num"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/msg/Num.msg -Imy_package:/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p my_package -o /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg
+
+/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg/__init__.py: /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg/_Num.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python msg __init__.py for my_package"
+	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg --initpy
+
+my_package_generate_messages_py: my_package/CMakeFiles/my_package_generate_messages_py
+my_package_generate_messages_py: /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg/_Num.py
+my_package_generate_messages_py: /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/python3/dist-packages/my_package/msg/__init__.py
 my_package_generate_messages_py: my_package/CMakeFiles/my_package_generate_messages_py.dir/build.make
 
 .PHONY : my_package_generate_messages_py

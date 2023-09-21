@@ -35,6 +35,8 @@ types.h
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/bin/types.h
 world.h
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/bin/world.h
+my_package/Num.h
+/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/bin/my_package/Num.h
 
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/include/lidar.h
 vector

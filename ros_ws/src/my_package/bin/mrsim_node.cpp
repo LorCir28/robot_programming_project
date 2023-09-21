@@ -2,13 +2,6 @@
 
 #include <opencv2/highgui.hpp>
 
-
-
-
-
-
-
-
 #include <nav_msgs/Odometry.h>
 #include <tf/transform_broadcaster.h>
 // #include <nlohmann/json.hpp>
@@ -26,12 +19,8 @@
 #include "types.h"
 #include "world.h"
 
-// using namespace std;
-// using json = nlohmann::json;
+#include "my_package/Num.h"
 
-
-
-// std::vector<int> vels;
 double vels[2];
 
 void callback(const geometry_msgs::Twist::ConstPtr& msg) {
@@ -40,16 +29,10 @@ void callback(const geometry_msgs::Twist::ConstPtr& msg) {
 
     ROS_INFO("Received cmd_vel: Linear=%f, Angular=%f", linear_vel, angular_vel);
 
-    // std::vector<int> vel;
-    // vel.push_back(linear_vel);
-    // vel.push_back(angular_vel);
-
-    // vels = vel;
 
     vels[0] = linear_vel;
     vels[1] = angular_vel;
 
-    // ROS_INFO("Received cmd_vel_from_vector: Linear=%f, Angular=%f", vels[0], vels[1]);
 
 }
 
@@ -88,16 +71,21 @@ int main(int argc, char** argv)
   double initialX = jsonData["items"][0]["pose"][0].asDouble();
   double initialY = jsonData["items"][0]["pose"][1].asDouble();
   double initialTheta = jsonData["items"][0]["pose"][2].asDouble();
-//   double initialLinearVelocity = jsonData["items"][0]["max_tv"].asDouble();
-//   double initialAngularVelocity = jsonData["items"][0]["max_rv"].asDouble();
   double initialLinearVelocity = 0;
   double initialAngularVelocity = 0;
 
   double radius = jsonData["items"][0]["radius"].asDouble();
 
+  double fov = jsonData["items"][1]["fov"].asDouble();
+  double max_range = jsonData["items"][1]["max_range"].asDouble();
+  double num_beams = jsonData["items"][1]["num_beams"].asDouble();
+  double lidarinitialX = jsonData["items"][1]["pose"][0].asDouble();
+  double lidarinitialY = jsonData["items"][1]["pose"][1].asDouble();
+  double lidarinitialTheta = jsonData["items"][1]["pose"][2].asDouble();
 
-  std::shared_ptr<World>  world_pointer(&world, [](World*){ });   // is a lambda function
-//   std::shared_ptr<World> world_pointer = std::make_shared<World>(world);
+
+  std::shared_ptr<World> world_pointer(&world, [](World*){ });
+
 
   Pose robot_pose = Pose::Identity();
   robot_pose.translation() = world.grid2world(Eigen::Vector2i(initialX, initialY));
@@ -105,11 +93,19 @@ int main(int argc, char** argv)
 
   Robot* robot = new Robot(radius, world_pointer, robot_pose);
 
+  std::shared_ptr<Robot> robot_pointer(robot, [](Robot*){ }); 
+  Pose lidar_pose = Pose::Identity();
+  lidar_pose.translation() = world.grid2world(Eigen::Vector2i(lidarinitialX, lidarinitialY));
+  lidar_pose.linear() = Eigen::Rotation2Df(lidarinitialTheta).matrix();
+
+  Lidar* lidar = new Lidar(fov, max_range, num_beams, robot_pointer, lidar_pose);
+
 
   ros::init(argc, argv, "odometry_publisher");
   ros::NodeHandle nh;
   ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("/robot_0/odom", 10);
   ros::Subscriber cmd_vel_sub = nh.subscribe("/robot_0/cmd_vel", 10, callback);
+  ros::Publisher lidar_pub = nh.advertise<my_package::Num>("/robot_0/scan", 10);
 
   // Create an Odometry message
   nav_msgs::Odometry odom;
@@ -125,13 +121,16 @@ int main(int argc, char** argv)
   odom.twist.twist.angular.z = initialAngularVelocity;
 
 
+  // Create the customized message
+  my_package::Num ranges;
+
+
   ros::Rate loop_rate(10);  // Publish at a rate of 10 Hz
 
 
   std::string map_path = jsonData["map"].asString();
   world.loadFromImage("/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/test_data/" + map_path); // to load the map image
 
-//   std::cout << "ciaooooo" << world._items.size();
 
   world.draw();
   cv::waitKey(1);
@@ -143,24 +142,14 @@ int main(int argc, char** argv)
       robot->tv = vels[0];
       robot->rv = vels[1];
 
-    //   sleep(0.01);
 
       world.timeTick(0.08);
 
       world.draw();
       cv::waitKey(1);
 
-    //   robot->tv = 0;
-    //   robot->rv = 0;
-
-    //   std::cout << vels[0] << std::endl;
-
       sleep(0.01);
 
-
-
-
-    //   std::cout << robot->tv << std::endl;
 
       // Update the timestamp
       odom.header.stamp = ros::Time::now();
@@ -177,8 +166,13 @@ int main(int argc, char** argv)
       odom.twist.twist.linear.x = robot->tv;
       odom.twist.twist.angular.z = robot->rv;
 
+      ranges.ranges = lidar->ranges;
+
       // Publish the Odometry message
       odom_pub.publish(odom);
+
+      // Publish the Lidar message
+      lidar_pub.publish(ranges);
 
       ros::spinOnce();
       loop_rate.sleep();

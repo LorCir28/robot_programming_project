@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/share/roseus/ros/my_package/manifest.l"
+  "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/share/roseus/ros/my_package/msg/Num.l"
   "CMakeFiles/my_package_generate_messages_eus"
 )
 

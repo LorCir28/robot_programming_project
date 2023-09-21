@@ -1,14 +1,11 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(my_package)
 
-# add_compile_options(-std=c++11)
-
 
 find_package(Eigen3 REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
-# find_package(jsoncpp REQUIRED)
-# find_package(nlohmann_json REQUIRED)
+
 
 
 find_package(catkin REQUIRED COMPONENTS
@@ -17,42 +14,23 @@ find_package(catkin REQUIRED COMPONENTS
   nav_msgs
   tf
   jsoncpp
+  message_generation
 )
 
 
-# set(jsoncpp_DIR /usr/lib/x86_64-linux-gnu/cmake/jsoncpp/jsoncppConfig.cmake)
-
-# include_directories(${catkin_INCLUDE_DIRS})
-# find_package(Boost REQUIRED COMPONENTS system)
-
-
-# catkin_python_setup()
 
 
 
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  Num.msg
+)
 
 
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
-
-# add_action_files(
-#   FILES
-#   Action1.action
-#   Action2.action
-# )
-
-#  generate_messages(
-#    DEPENDENCIES
-#    std_msgs
-#  )
+ generate_messages(
+   DEPENDENCIES
+   std_msgs
+ )
 
 
 # generate_dynamic_reconfigure_options(
@@ -66,6 +44,7 @@ catkin_package(
 #  LIBRARIES my_package
    CATKIN_DEPENDS roscpp std_msgs nav_msgs tf
 #  DEPENDS system_lib
+  message_runtime
 )
 
 include_directories(
@@ -91,7 +70,8 @@ target_link_libraries(my_package PUBLIC ${OpenCV_LIBRARIES} Eigen3::Eigen)
 add_executable(test_node bin/mrsim_node.cpp src/robot.cpp src/world.cpp src/lidar.cpp)
 add_executable(cmd_vel_pub bin/cmd_vel_pub_node.cpp)
 # add_executable(cmd_vel_sub bin/cmd_vel_sub_node.cpp)
-add_executable(lidar_pub bin/lidar_pub_node.cpp)
+# add_executable(lidar_pub bin/lidar_pub_node.cpp)
+# add_executable(lidar_sub bin/lidar_sub_node.cpp)
 
 
 # set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
@@ -125,7 +105,9 @@ target_link_libraries(cmd_vel_pub ${catkin_LIBRARIES})
 
 # target_link_libraries(cmd_vel_sub ${catkin_LIBRARIES})
 
-target_link_libraries(lidar_pub ${catkin_LIBRARIES})
+# target_link_libraries(lidar_pub ${catkin_LIBRARIES})
+
+# target_link_libraries(lidar_sub ${catkin_LIBRARIES})
 
 
 # add_executable(robot src/robot.cpp)

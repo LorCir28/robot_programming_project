@@ -26,7 +26,6 @@ int main(int argc, char** argv)
 
     ros::Rate loop_rate(10);  // Publish at a rate of 10 Hz
 
-
     struct termios oldt, newt;
     tcgetattr(STDIN_FILENO, &oldt);
     newt = oldt;

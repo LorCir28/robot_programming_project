@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/install/lib;/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/install/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -177,7 +177,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-set(my_package_EXPORTED_TARGETS "")
+set(my_package_EXPORTED_TARGETS "my_package_generate_messages_cpp;my_package_generate_messages_eus;my_package_generate_messages_lisp;my_package_generate_messages_nodejs;my_package_generate_messages_py")
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${my_package_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -185,7 +185,7 @@ foreach(t ${my_package_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "roscpp;std_msgs;nav_msgs;tf")
+set(depends "roscpp;std_msgs;nav_msgs;tf;message_runtime")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls
@@ -214,7 +214,7 @@ foreach(depend ${depends})
   _list_append_deduplicate(my_package_EXPORTED_TARGETS ${${my_package_dep}_EXPORTED_TARGETS})
 endforeach()
 
-set(pkg_cfg_extras "")
+set(pkg_cfg_extras "my_package-msg-extras.cmake")
 foreach(extra ${pkg_cfg_extras})
   if(NOT IS_ABSOLUTE ${extra})
     set(extra ${my_package_DIR}/${extra})
