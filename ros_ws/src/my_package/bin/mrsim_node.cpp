@@ -124,9 +124,13 @@ int main(int argc, char** argv)
 
   ros::Rate loop_rate(10);  // Publish at a rate of 10 Hz
 
+
+  std::string map_path = jsonData["map"].asString();
+  world.loadFromImage("/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/test_data/" + map_path);      // to load the map image
+
   while (ros::ok())
   {
-      // world.draw();
+      world.draw();
       cv::waitKey(1);
       world.timeTick(0.08);
 
