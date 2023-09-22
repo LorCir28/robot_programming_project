@@ -4,9 +4,7 @@
 
 #include <nav_msgs/Odometry.h>
 #include <tf/transform_broadcaster.h>
-// #include <nlohmann/json.hpp>
 #include <fstream>
-// #include <json/value.h>
 #include <iostream>
 #include <jsoncpp/json/value.h>
 #include <jsoncpp/json/json.h>
@@ -143,7 +141,7 @@ int main(int argc, char** argv)
       robot->rv = vels[1];
 
 
-      world.timeTick(0.08);
+      world.timeTick(0.08); // world function that calls the timetick functions for all the world items: in this way, the pose of the robot is upgraded
 
       world.draw();
       cv::waitKey(1);
@@ -154,7 +152,7 @@ int main(int argc, char** argv)
       // Update the timestamp
       odom.header.stamp = ros::Time::now();
 
-    // to upgrade the odometry of the robot
+      // to upgrade the odometry of the robot
       odom.pose.pose.position.x = robot->poseInWorld().translation().x();
       odom.pose.pose.position.y = robot->poseInWorld().translation().y();
 

@@ -21,8 +21,6 @@ int main(int argc, char** argv)
 
     // Create a Twist message with desired linear and angular velocities
     geometry_msgs::Twist cmd_vel_msg;
-    // cmd_vel_msg.linear.x = 3.2;     // Linear velocity (m/s)
-    // cmd_vel_msg.angular.z = 0.5;    // Angular velocity (rad/s)
 
     ros::Rate loop_rate(10);  // Publish at a rate of 10 Hz
 
@@ -40,7 +38,6 @@ int main(int argc, char** argv)
 
         // sleep(0.025);
         this_thread::sleep_for(chrono::milliseconds(25)); // sleep for x milliseconds
-        // publishers_vector[robot_index].publish(msg);
         cmd_vel_pub.publish(cmd_vel_msg);  // Publish the Twist message
         ros::spinOnce();
     
@@ -61,31 +58,14 @@ int main(int argc, char** argv)
             }
             else break;
         } 
-        // else if (ch == 'c')  {
-        // select_robot = true; 
-        // clear = true;
-        // }
-        // else if (ch != 'A' && ch != 'B' && ch != 'C' && ch != 'D') {
-        // clearTerminal(); cout << "Invalid command: " << ch << endl; cout.flush();
-        // }
-        // else ;
+
 
         cmd_vel_pub.publish(cmd_vel_msg);  // Publish the Twist message
         ros::spinOnce();
-        // loop_rate.sleep();
     }
 
 
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-
-    
-
-    // cmd_vel_msg.linear.x = 0;     // Linear velocity (m/s)
-    // cmd_vel_msg.angular.z = 0;    // Angular velocity (rad/s)
-
-    // cmd_vel_pub.publish(cmd_vel_msg);  // Publish the Twist message
-    // ros::spinOnce();
-    // sleep(1);
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // to reset the terminal
 
 
     return 0;

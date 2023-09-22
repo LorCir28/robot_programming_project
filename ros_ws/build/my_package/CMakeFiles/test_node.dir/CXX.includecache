@@ -6,6 +6,22 @@
 
 #IncludeRegexTransform: 
 
+/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/include/my_package/Num.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
 /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/bin/mrsim_node.cpp
 ros/ros.h
 -
