@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src
+CMAKE_SOURCE_DIR = /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build
+CMAKE_BINARY_DIR = /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build
 
 # Utility rule file for download_extra_data.
 
@@ -67,6 +67,6 @@ CMakeFiles/download_extra_data.dir/clean:
 .PHONY : CMakeFiles/download_extra_data.dir/clean
 
 CMakeFiles/download_extra_data.dir/depend:
-	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/CMakeFiles/download_extra_data.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build/CMakeFiles/download_extra_data.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/download_extra_data.dir/depend
 

@@ -1,8 +1,8 @@
-prefix=/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel
+prefix=/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/devel
 
 Name: my_package
 Description: Description of my_package
 Version: 0.0.0
-Cflags: -I/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/include -I/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/include/
+Cflags: -I/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/devel/include -I/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src/my_package/include/
 Libs: -L${prefix}/lib 
 Requires: roscpp std_msgs nav_msgs tf message_runtime

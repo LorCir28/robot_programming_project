@@ -17,7 +17,8 @@
 #include "types.h"
 #include "world.h"
 
-#include "my_package/Num.h"
+// #include "my_package/Num.h"
+#include "sensor_msgs/LaserScan.h"
 
 double vels[2];
 
@@ -42,7 +43,7 @@ int main(int argc, char** argv)
   World world; // to create the world
 
   // Specify the path to the JSON file
-  const std::string jsonFilePath = "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/test_data/cappero_1r.json";
+  const std::string jsonFilePath = "/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src/my_package/test_data/cappero_1r.json";
 
   // Read the JSON file
   std::ifstream jsonFile(jsonFilePath);
@@ -80,6 +81,7 @@ int main(int argc, char** argv)
   double lidarinitialX = jsonData["items"][1]["pose"][0].asDouble();
   double lidarinitialY = jsonData["items"][1]["pose"][1].asDouble();
   double lidarinitialTheta = jsonData["items"][1]["pose"][2].asDouble();
+  std::string lidar_frame_id = jsonData["items"][1]["frame_id"].asString();
 
 
   std::shared_ptr<World> world_pointer(&world, [](World*){ });
@@ -103,7 +105,8 @@ int main(int argc, char** argv)
   ros::NodeHandle nh;
   ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("/robot_0/odom", 10);
   ros::Subscriber cmd_vel_sub = nh.subscribe("/robot_0/cmd_vel", 10, callback);
-  ros::Publisher lidar_pub = nh.advertise<my_package::Num>("/robot_0/scan", 10);
+//   ros::Publisher lidar_pub = nh.advertise<my_package::Num>("/robot_0/scan", 10);
+  ros::Publisher lidar_pub = nh.advertise<sensor_msgs::LaserScan>("/robot_0/scan", 10);
 
   // Create an Odometry message
   nav_msgs::Odometry odom;
@@ -120,14 +123,26 @@ int main(int argc, char** argv)
 
 
   // Create the customized message
-  my_package::Num ranges;
+//   my_package::Num ranges;
+  sensor_msgs::LaserScan scan_msg;
+
+  scan_msg.header.frame_id = lidar_frame_id;
+  scan_msg.angle_min = -fov;
+  scan_msg.angle_max = fov;
+  scan_msg.angle_increment = fov / num_beams;
+  scan_msg.time_increment = 0.001;
+  scan_msg.scan_time = 0.1;
+  scan_msg.range_min = 0.0;
+  scan_msg.range_max = max_range;
+//   scan_msg.ranges.resize(num_beams, 2.0);
+  scan_msg.ranges = lidar->ranges;
 
 
   ros::Rate loop_rate(10);  // Publish at a rate of 10 Hz
 
 
   std::string map_path = jsonData["map"].asString();
-  world.loadFromImage("/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/test_data/" + map_path); // to load the map image
+  world.loadFromImage("/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src/my_package/test_data/" + map_path); // to load the map image
 
 
   world.draw();
@@ -164,13 +179,19 @@ int main(int argc, char** argv)
       odom.twist.twist.linear.x = robot->tv;
       odom.twist.twist.angular.z = robot->rv;
 
-      ranges.ranges = lidar->ranges;
+    //   ranges.ranges = lidar->ranges;
 
       // Publish the Odometry message
       odom_pub.publish(odom);
 
+      // to update the lidar data
+
+      scan_msg.header.stamp = ros::Time::now();
+      scan_msg.ranges = lidar->ranges;
+
+
       // Publish the Lidar message
-      lidar_pub.publish(ranges);
+      lidar_pub.publish(scan_msg);
 
       ros::spinOnce();
       loop_rate.sleep();

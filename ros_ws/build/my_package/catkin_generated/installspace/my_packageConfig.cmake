@@ -67,14 +67,14 @@ set(my_package_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(my_package_SOURCE_PREFIX /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package)
-  set(my_package_DEVEL_PREFIX /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel)
+  set(my_package_SOURCE_PREFIX /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src/my_package)
+  set(my_package_DEVEL_PREFIX /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/devel)
   set(my_package_INSTALL_PREFIX "")
   set(my_package_PREFIX ${my_package_DEVEL_PREFIX})
 else()
   set(my_package_SOURCE_PREFIX "")
   set(my_package_DEVEL_PREFIX "")
-  set(my_package_INSTALL_PREFIX /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/install)
+  set(my_package_INSTALL_PREFIX /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/install)
   set(my_package_PREFIX ${my_package_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/install/lib;/opt/ros/noetic/lib)
+    foreach(path /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/install/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package/bin/cmd_vel_pub_node.cpp
+/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src/my_package/bin/cmd_vel_pub_node.cpp
 ros/ros.h
 -
 geometry_msgs/Twist.h
@@ -452,6 +452,8 @@ ros/datatypes.h
 vector
 -
 map
+-
+memory
 -
 boost/array.hpp
 -

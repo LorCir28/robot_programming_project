@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/libmy_package.pdb"
-  "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/libmy_package.so"
+  "/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/devel/lib/libmy_package.pdb"
+  "/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/devel/lib/libmy_package.so"
   "CMakeFiles/my_package.dir/src/lidar.cpp.o"
   "CMakeFiles/my_package.dir/src/robot.cpp.o"
   "CMakeFiles/my_package.dir/src/world.cpp.o"

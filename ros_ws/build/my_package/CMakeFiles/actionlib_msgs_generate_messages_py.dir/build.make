@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src
+CMAKE_SOURCE_DIR = /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build
+CMAKE_BINARY_DIR = /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build
 
 # Utility rule file for actionlib_msgs_generate_messages_py.
 
@@ -63,10 +63,10 @@ my_package/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build: actionlib_m
 .PHONY : my_package/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 
 my_package/CMakeFiles/actionlib_msgs_generate_messages_py.dir/clean:
-	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package && $(CMAKE_COMMAND) -P CMakeFiles/actionlib_msgs_generate_messages_py.dir/cmake_clean.cmake
+	cd /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build/my_package && $(CMAKE_COMMAND) -P CMakeFiles/actionlib_msgs_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : my_package/CMakeFiles/actionlib_msgs_generate_messages_py.dir/clean
 
 my_package/CMakeFiles/actionlib_msgs_generate_messages_py.dir/depend:
-	cd /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/src/my_package /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package /home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/build/my_package/CMakeFiles/actionlib_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src/my_package /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build/my_package /home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/build/my_package/CMakeFiles/actionlib_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : my_package/CMakeFiles/actionlib_msgs_generate_messages_py.dir/depend
 

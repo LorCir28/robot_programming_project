@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node"
-  "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/lib/my_package/test_node.pdb"
+  "/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/devel/lib/my_package/test_node"
+  "/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/devel/lib/my_package/test_node.pdb"
   "CMakeFiles/test_node.dir/bin/mrsim_node.cpp.o"
   "CMakeFiles/test_node.dir/src/lidar.cpp.o"
   "CMakeFiles/test_node.dir/src/robot.cpp.o"

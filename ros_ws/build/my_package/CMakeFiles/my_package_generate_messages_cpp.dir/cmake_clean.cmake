@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/include/my_package/Num.h"
+  "/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/devel/include/my_package/Num.h"
   "CMakeFiles/my_package_generate_messages_cpp"
 )
 

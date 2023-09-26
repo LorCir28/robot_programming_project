@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/lattinone/Desktop/Lorenzo/rp/rp_project/ros_ws/devel/share/gennodejs/ros/my_package/msg/Num.js"
+  "/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/devel/share/gennodejs/ros/my_package/msg/Num.js"
   "CMakeFiles/my_package_generate_messages_nodejs"
 )
 
