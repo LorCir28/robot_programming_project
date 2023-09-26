@@ -45,6 +45,21 @@
                 0
             ],
             "parent": -1
+        },
+        {
+            "id": 3,
+            "type": "lidar",
+            "frame_id": "frame_lidar1",
+            "namespace": "robot_1",
+            "fov": 6.18,
+            "max_range": 10.0,
+            "num_beams": 360,
+            "pose": [
+                0,
+                0,
+                0
+            ],
+            "parent": 2
         }
     ]
 }

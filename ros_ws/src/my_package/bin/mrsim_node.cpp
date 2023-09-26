@@ -70,9 +70,13 @@ int main(int argc, char** argv)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     int j = 0;
+    int t = 0;
     for (int i = 0; i < jsonData["items"].size(); i++) {
         if (jsonData["items"][i]["type"] == "robot") {
             j++;
+        }
+        else if (jsonData["items"][i]["type"] == "lidar") {
+            t++;
         }
     }
 
@@ -90,10 +94,17 @@ int main(int argc, char** argv)
     nav_msgs::Odometry odoms[j];
     ros::Publisher odom_pubs[j];
     ros::Subscriber cmd_vel_subs[j];
+    int robot_ids[j];
+
+    sensor_msgs::LaserScan scan_msgs[t];
+    Lidar* lidars[t];
+    ros::Publisher lidar_pubs[t];
+    
 
 
 
     int k = 0;
+    int r = 0;
     for (int i = 0; i < jsonData["items"].size(); i++) {
 
         if (jsonData["items"][i]["type"] == "robot") {
@@ -106,6 +117,10 @@ int main(int argc, char** argv)
             std::string robot_frame_id = jsonData["items"][i]["frame_id"].asString();
             double radius = jsonData["items"][i]["radius"].asDouble();
             std::string robot_namespace = jsonData["items"][i]["namespace"].asString();
+            int robot_id = jsonData["items"][i]["id"].asInt();
+
+            robot_ids[k] = robot_id;
+
 
             std::shared_ptr<World> world_pointer(&world, [](World*){ });
             Pose robot_pose = Pose::Identity();
@@ -117,12 +132,12 @@ int main(int argc, char** argv)
 
             // std::cout << "11111111" << std::endl;
 
-            // std::shared_ptr<Robot> robot_pointer(robot, [](Robot*){ });
 
             ros::init(argc, argv, "odometry_publisher");
             ros::NodeHandle nh;
             ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("/" + robot_namespace + "/odom", 10);
             ros::Subscriber cmd_vel_sub = nh.subscribe("/" + robot_namespace + "/cmd_vel", 10, callback);
+
 
             odom_pubs[k] = odom_pub;
             cmd_vel_subs[k] = cmd_vel_sub;
@@ -142,6 +157,73 @@ int main(int argc, char** argv)
             odoms[k] = odom;
 
             k++;
+
+        }
+
+        else if (jsonData["items"][i]["type"] == "lidar") {
+
+            double fov = jsonData["items"][i]["fov"].asDouble();
+            double max_range = jsonData["items"][i]["max_range"].asDouble();
+            double num_beams = jsonData["items"][i]["num_beams"].asDouble();
+            double lidarinitialX = jsonData["items"][i]["pose"][0].asDouble();
+            double lidarinitialY = jsonData["items"][i]["pose"][1].asDouble();
+            double lidarinitialTheta = jsonData["items"][i]["pose"][2].asDouble();
+            std::string lidar_frame_id = jsonData["items"][i]["frame_id"].asString();
+            std::string robot_namespace = jsonData["items"][i]["namespace"].asString();
+            int parent_id = jsonData["items"][i]["parent"].asInt();
+
+
+            Pose lidar_pose = Pose::Identity();
+            lidar_pose.translation() = world.grid2world(Eigen::Vector2i(lidarinitialX, lidarinitialY));
+            lidar_pose.linear() = Eigen::Rotation2Df(lidarinitialTheta).matrix();
+
+
+            for (int i = 0; i < sizeof(robots) / sizeof(robots[0]); i++) {
+
+                if (parent_id == robot_ids[i]) {
+                    std::shared_ptr<Robot> robot_pointer(robots[i], [](Robot*){ });
+                    Lidar* lidar = new Lidar(fov, max_range, num_beams, robot_pointer, lidar_pose);
+            
+                    lidars[r] = lidar;
+                }
+
+
+            }
+
+
+            // std::shared_ptr<Robot> robot_pointer(robot, [](Robot*){ });
+
+            // Pose lidar_pose = Pose::Identity();
+            // lidar_pose.translation() = world.grid2world(Eigen::Vector2i(lidarinitialX, lidarinitialY));
+            // lidar_pose.linear() = Eigen::Rotation2Df(lidarinitialTheta).matrix();
+
+            // Lidar* lidar = new Lidar(fov, max_range, num_beams, robot_pointer, lidar_pose);
+            
+            // lidars[r] = lidar;
+
+
+            ros::NodeHandle nh;
+
+            ros::Publisher lidar_pub = nh.advertise<sensor_msgs::LaserScan>("/" + robot_namespace + "/scan", 10);
+            lidar_pubs[r] = lidar_pub;
+
+
+            sensor_msgs::LaserScan scan_msg;
+
+            scan_msg.header.frame_id = lidar_frame_id;
+            scan_msg.angle_min = -fov;
+            scan_msg.angle_max = fov;
+            scan_msg.angle_increment = fov / num_beams;
+            scan_msg.time_increment = 0.001;
+            scan_msg.scan_time = 0.1;
+            scan_msg.range_min = 0.0;
+            scan_msg.range_max = max_range;
+            //   scan_msg.ranges.resize(num_beams, 2.0);
+            scan_msg.ranges = lidars[r]->ranges;
+
+            scan_msgs[r] = scan_msg;
+
+            r++;
 
         }
 
@@ -204,6 +286,17 @@ int main(int argc, char** argv)
 
             // Publish the Odometry message
             odom_pubs[i].publish(odoms[i]);
+
+        }
+
+
+        for (int i = 0; i < r; i++) {
+
+            scan_msgs[i].header.stamp = ros::Time::now();
+            scan_msgs[i].ranges = lidars[i]->ranges; 
+
+            lidar_pubs[i].publish(scan_msgs[i]);
+    
 
         }
 
