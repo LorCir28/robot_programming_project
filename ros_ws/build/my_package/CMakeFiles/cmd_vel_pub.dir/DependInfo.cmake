@@ -10,6 +10,8 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
+  "BOOST_ALL_NO_LIB"
+  "BOOST_SYSTEM_DYN_LINK"
   "ROSCONSOLE_BACKEND_LOG4CXX"
   "ROS_BUILD_SHARED_LIBS=1"
   "ROS_PACKAGE_NAME=\"my_package\""
@@ -20,6 +22,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/devel/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+  "/usr/include/opencv4"
+  "/usr/include/eigen3"
   )
 
 # Targets to which this target links.

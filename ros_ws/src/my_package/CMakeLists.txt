@@ -76,6 +76,12 @@ target_link_libraries(test_node PUBLIC
     jsoncpp
 )
 
-target_link_libraries(cmd_vel_pub ${catkin_LIBRARIES})
+target_link_libraries(cmd_vel_pub 
+    ${OpenCV_LIBRARIES} 
+    Eigen3::Eigen
+    ${catkin_LIBRARIES}
+    ${Boost_LIBRARIES}
+    jsoncpp
+)
 
 

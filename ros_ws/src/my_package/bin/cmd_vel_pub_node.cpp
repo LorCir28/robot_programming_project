@@ -8,16 +8,74 @@
 #include <thread>
 #include <chrono>
 
+
+
+
+#include <tf/transform_broadcaster.h>
+#include <fstream>
+#include <iostream>
+#include <jsoncpp/json/value.h>
+#include <jsoncpp/json/json.h>
+#include <string>
+
+#include <geometry_msgs/Twist.h>
+
+
+// #include "my_package/Num.h"
+#include "sensor_msgs/LaserScan.h"
+
 using namespace std;
+
 
 int main(int argc, char** argv)
 {
+    // Specify the path to the JSON file
+    const string jsonFilePath = "/home/loris/Desktop/university/master/rp/git_project/robot_programming_project/ros_ws/src/my_package/test_data/cappero_1r.json";
+
+    // Read the JSON file
+    ifstream jsonFile(jsonFilePath);
+
+    // Check if the file is opened successfully
+    if (!jsonFile.is_open()) {
+        ROS_ERROR("Failed to open JSON file.");
+        return 1;
+    }
+
+
+    // Parse the JSON data
+    Json::CharReaderBuilder builder;
+    Json::CharReader* reader(builder.newCharReader());
+    Json::Value jsonData;
+
+    string errors;
+    Json::parseFromStream(builder, jsonFile, &jsonData, &errors);
+
+    // Close the file
+    jsonFile.close();
+
+
     // Initialize the ROS node
     ros::init(argc, argv, "cmd_vel_publisher");
     ros::NodeHandle nh;
 
-    // Create a publisher for the cmd_vel topic
-    ros::Publisher cmd_vel_pub = nh.advertise<geometry_msgs::Twist>("/robot_0/cmd_vel", 1000);
+    int j = 0;
+    for (int i = 0; i < jsonData["items"].size(); i++) {
+        if (jsonData["items"][i]["type"] == "robot") {
+            j++;
+        }
+    }
+
+    ros::Publisher cmd_vel_pubs[j];
+
+    int k = 0;
+    for (int i = 0; i < jsonData["items"].size(); i++) {
+        string robot_namespace = jsonData["items"][i]["namespace"].asString();
+        // Create a publisher for the cmd_vel topic
+        ros::Publisher cmd_vel_pub = nh.advertise<geometry_msgs::Twist>("/" + robot_namespace + "/cmd_vel", 1000);
+        cmd_vel_pubs[k] = cmd_vel_pub;
+        k++;
+    }
+
 
     // Create a Twist message with desired linear and angular velocities
     geometry_msgs::Twist cmd_vel_msg;
@@ -38,7 +96,11 @@ int main(int argc, char** argv)
 
         // sleep(0.025);
         this_thread::sleep_for(chrono::milliseconds(25)); // sleep for x milliseconds
-        cmd_vel_pub.publish(cmd_vel_msg);  // Publish the Twist message
+
+        for (int i = 0; i < k; i++) {
+            cmd_vel_pubs[i].publish(cmd_vel_msg);  // Publish the Twist message
+        }
+
         ros::spinOnce();
     
         char ch = getchar();
@@ -59,8 +121,10 @@ int main(int argc, char** argv)
             else break;
         } 
 
-
-        cmd_vel_pub.publish(cmd_vel_msg);  // Publish the Twist message
+        for (int i = 0; i < k; i++) {
+            cmd_vel_pubs[i].publish(cmd_vel_msg);  // Publish the Twist message
+        }
+        
         ros::spinOnce();
     }
 
