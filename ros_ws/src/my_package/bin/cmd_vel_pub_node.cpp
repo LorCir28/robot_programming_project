@@ -64,7 +64,6 @@ int main(int argc, char** argv)
             j++;
         }
     }
-    // cout << "111111111111111111111" << endl;
 
     ros::Publisher cmd_vel_pubs[j];
 
@@ -79,7 +78,6 @@ int main(int argc, char** argv)
         }
         
     }
-    // cout << "111111111111111111111" << endl;
 
     // Create a Twist message with desired linear and angular velocities
     geometry_msgs::Twist cmd_vel_msg;
@@ -95,7 +93,6 @@ int main(int argc, char** argv)
     while (ros::ok())
     {
 
-        // cout << "111111111111111111111" << endl;
         
         cmd_vel_msg.linear.x = 0.0;
         cmd_vel_msg.angular.z = 0.0;
@@ -107,7 +104,6 @@ int main(int argc, char** argv)
             cmd_vel_pubs[i].publish(cmd_vel_msg);  // Publish the Twist message
         }
 
-        // cout << "22222222222222" << endl;
 
         ros::spinOnce();
     

@@ -80,16 +80,6 @@ int main(int argc, char** argv)
         }
     }
 
-    // double initialX[j];
-    // double initialY[j];
-    // double initialTheta[j];
-    // double initialLinearVelocity = 0;
-    // double initialAngularVelocity = 0;
-    // std::string robot_frame_id[j];
-    // double radius[j];
-    // std::string robot_namespace[j];
-    // std::shared_ptr<World> world_pointer(&world, [](World*){ });
-    // Pose robot_pose = Pose::Identity();
     Robot* robots[j];
     nav_msgs::Odometry odoms[j];
     ros::Publisher odom_pubs[j];
@@ -129,8 +119,6 @@ int main(int argc, char** argv)
 
             Robot* robot = new Robot(radius, world_pointer, robot_pose);
             robots[k] = robot;
-
-            // std::cout << "11111111" << std::endl;
 
 
             ros::init(argc, argv, "odometry_publisher");
@@ -191,17 +179,6 @@ int main(int argc, char** argv)
             }
 
 
-            // std::shared_ptr<Robot> robot_pointer(robot, [](Robot*){ });
-
-            // Pose lidar_pose = Pose::Identity();
-            // lidar_pose.translation() = world.grid2world(Eigen::Vector2i(lidarinitialX, lidarinitialY));
-            // lidar_pose.linear() = Eigen::Rotation2Df(lidarinitialTheta).matrix();
-
-            // Lidar* lidar = new Lidar(fov, max_range, num_beams, robot_pointer, lidar_pose);
-            
-            // lidars[r] = lidar;
-
-
             ros::NodeHandle nh;
 
             ros::Publisher lidar_pub = nh.advertise<sensor_msgs::LaserScan>("/" + robot_namespace + "/scan", 10);
@@ -218,7 +195,6 @@ int main(int argc, char** argv)
             scan_msg.scan_time = 0.1;
             scan_msg.range_min = 0.0;
             scan_msg.range_max = max_range;
-            //   scan_msg.ranges.resize(num_beams, 2.0);
             scan_msg.ranges = lidars[r]->ranges;
 
             scan_msgs[r] = scan_msg;
@@ -229,7 +205,6 @@ int main(int argc, char** argv)
 
     }
 
-    // std::cout << "11111111" << std::endl;
     
     ros::Rate loop_rate(10);  // Publish at a rate of 10 Hz
 
@@ -241,20 +216,16 @@ int main(int argc, char** argv)
     world.draw();
     cv::waitKey(1);
 
-    // std::cout << "22222222" << std::endl;
 
     while (ros::ok())
     {
         ros::spinOnce();
 
-        // std::cout << k << std::endl;
 
         for (int i = 0; i < k; i++) {
             robots[i]->tv = vels[0];
             robots[i]->rv = vels[1];
         }
-
-        // std::cout << "22222222" << std::endl;
 
 
 
@@ -300,14 +271,6 @@ int main(int argc, char** argv)
 
         }
 
-        // to update the lidar data
-
-        // scan_msg.header.stamp = ros::Time::now();
-        // scan_msg.ranges = lidar->ranges;
-
-
-        // Publish the Lidar message
-        // lidar_pub.publish(scan_msg);
 
         ros::spinOnce();
         loop_rate.sleep();
