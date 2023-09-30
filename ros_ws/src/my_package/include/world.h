@@ -45,7 +45,7 @@ class World {
   unsigned int rows = 0, cols = 0;
   unsigned int size = 0;
   float res = 0.05, i_res = 20.0;
-
+  // string pippo = "map";
   cv::Mat display_image;
 
 //  protected:

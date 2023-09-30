@@ -19,6 +19,15 @@
 
 // #include "my_package/Num.h"
 #include "sensor_msgs/LaserScan.h"
+#include <tf/transform_broadcaster.h>
+
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2/LinearMath/Transform.h>
+#include <tf2/convert.h> 
+
+#include <tf2_ros/transform_broadcaster.h>
+#include <tf2_eigen/tf2_eigen.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
 double vels[2];
 
@@ -85,6 +94,7 @@ int main(int argc, char** argv)
     ros::Publisher odom_pubs[j];
     ros::Subscriber cmd_vel_subs[j];
     int robot_ids[j];
+    std::string robot_frame_ids[j];
 
     sensor_msgs::LaserScan scan_msgs[t];
     Lidar* lidars[t];
@@ -110,6 +120,7 @@ int main(int argc, char** argv)
             int robot_id = jsonData["items"][i]["id"].asInt();
 
             robot_ids[k] = robot_id;
+            robot_frame_ids[k] = robot_frame_id;
 
 
             std::shared_ptr<World> world_pointer(&world, [](World*){ });
@@ -133,8 +144,8 @@ int main(int argc, char** argv)
             // Create an Odometry message
             nav_msgs::Odometry odom;
             //   odom.header.frame_id = "odom";
-            odom.header.frame_id = robot_frame_id;
-            odom.child_frame_id = "base_link";
+            odom.header.frame_id = "map";
+            odom.child_frame_id = robot_frame_id;
             // Set the initial pose and velocity using data from JSON
             odom.pose.pose.position.x = initialX;
             odom.pose.pose.position.y = initialY;
@@ -143,6 +154,64 @@ int main(int argc, char** argv)
             odom.twist.twist.angular.z = initialAngularVelocity;
 
             odoms[k] = odom;
+
+
+            // transform odometry sending
+            // tf::TransformBroadcaster odom_broadcaster;
+            // geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(initialTheta);
+
+            // geometry_msgs::TransformStamped odom_trans;
+            // odom_trans.header.stamp = ros::Time::now();
+            // odom_trans.header.frame_id = "map";
+            // odom_trans.child_frame_id = robot_frame_id;
+
+            // odom_trans.transform.translation.x = initialX;
+            // odom_trans.transform.translation.y = initialY;
+            // // odom_trans.transform.translation.z = 0.0;
+            // odom_trans.transform.rotation = odom_quat;
+
+            // //send the transform
+            // odom_broadcaster.sendTransform(odom_trans);
+
+
+            // geometry_msgs::TransformStamped transform_stamped;
+            // transform_stamped.header.stamp = ros::Time::now();
+            // transform_stamped.header.frame_id = "map";
+            // transform_stamped.child_frame_id = robot_frame_id;
+
+            /**
+             * 
+             * This is the right choice for representing 2D rotations.
+             * 
+             * Quaternion: x, y, z, w
+             */
+
+            // Pose transformation = robot->poseInWorld();
+            // tf2::Quaternion rotation;
+            // rotation.setRPY(0.0, 0.0, Rotation(transformation.linear()).angle());
+            // rotation.normalize();
+
+            // // Let's create a translation vector which will be composed by (x, y, z).
+            // // Since we are in 2D, z is equal to 0.
+            // tf2::Vector3 translation(transformation.translation().x(), transformation.translation().y(), 0.0);
+
+            // // Now we create the Transform object, by applying the rotation and translation created before.
+            // tf2::Transform tf_transform(rotation, translation);
+
+            // // Translation part. We get the translation values and put them in the transform_stamped.
+            // transform_stamped.transform.translation.x = tf_transform.getOrigin().x();
+            // transform_stamped.transform.translation.y = tf_transform.getOrigin().y();
+            // transform_stamped.transform.translation.z = tf_transform.getOrigin().z();
+
+            // // Rotation part. We get the rotation values and put them in the transform_stamped.
+            // transform_stamped.transform.rotation.x = tf_transform.getRotation().x();
+            // transform_stamped.transform.rotation.y = tf_transform.getRotation().y();
+            // transform_stamped.transform.rotation.z = tf_transform.getRotation().z();
+            // transform_stamped.transform.rotation.w = tf_transform.getRotation().w();
+
+            // static tf2_ros::TransformBroadcaster br;
+            // br.sendTransform(transform_stamped);
+
 
             k++;
 
@@ -166,6 +235,10 @@ int main(int argc, char** argv)
             lidar_pose.linear() = Eigen::Rotation2Df(lidarinitialTheta).matrix();
 
 
+            sensor_msgs::LaserScan scan_msg;
+            // geometry_msgs::TransformStamped scan_trans;
+            // static tf2_ros::TransformBroadcaster br;
+            // geometry_msgs::TransformStamped transform_stamped;
             for (int i = 0; i < sizeof(robots) / sizeof(robots[0]); i++) {
 
                 if (parent_id == robot_ids[i]) {
@@ -173,6 +246,12 @@ int main(int argc, char** argv)
                     Lidar* lidar = new Lidar(fov, max_range, num_beams, robot_pointer, lidar_pose);
             
                     lidars[r] = lidar;
+
+                    // scan_trans.header.frame_id = robot_frame_ids[i];
+                    // scan_trans.header.frame_id = "map";
+                    // scan_msg.header.frame_id = robot_frame_ids[i];
+                    scan_msg.header.frame_id = "map";
+                    // transform_stamped.header.frame_id = robot_frame_ids[i];
                 }
 
 
@@ -185,9 +264,9 @@ int main(int argc, char** argv)
             lidar_pubs[r] = lidar_pub;
 
 
-            sensor_msgs::LaserScan scan_msg;
+            // sensor_msgs::LaserScan scan_msg;
 
-            scan_msg.header.frame_id = lidar_frame_id;
+            // scan_msg.header.frame_id = lidar_frame_id;
             scan_msg.angle_min = -fov;
             scan_msg.angle_max = fov;
             scan_msg.angle_increment = fov / num_beams;
@@ -196,8 +275,48 @@ int main(int argc, char** argv)
             scan_msg.range_min = 0.0;
             scan_msg.range_max = max_range;
             scan_msg.ranges = lidars[r]->ranges;
+            scan_msg.header.stamp = ros::Time::now();
 
             scan_msgs[r] = scan_msg;
+
+
+            // tf::TransformBroadcaster scan_broadcaster;
+            // geometry_msgs::Quaternion scan_quat = tf::createQuaternionMsgFromYaw(lidarinitialTheta);
+
+            // // geometry_msgs::TransformStamped scan_trans;
+            // scan_trans.header.stamp = ros::Time::now();
+            // // scan_trans.header.frame_id = robot_frame_id;
+            // scan_trans.child_frame_id = lidar_frame_id;
+
+            // scan_trans.transform.translation.x = lidarinitialX;
+            // scan_trans.transform.translation.y = lidarinitialY;
+            // // scan_trans.transform.translation.z = 0.0;
+            // scan_trans.transform.rotation = scan_quat;
+
+            // //send the transform
+            // scan_broadcaster.sendTransform(scan_trans);
+
+            // static tf2_ros::TransformBroadcaster br;
+            // geometry_msgs::TransformStamped transform_stamped;
+
+            // transform_stamped.header.frame_id = parentFrameID;
+            // transform_stamped.child_frame_id = lidar_frame_id;
+            // transform_stamped.header.stamp = ros::Time::now();
+
+            // transform_stamped.transform.translation.x = 0.0;
+            // transform_stamped.transform.translation.y = 0.0;
+            // transform_stamped.transform.translation.z = 0.0;
+
+            // tf2::Quaternion q;
+            // q.setRPY(0, 0, 0);
+            // q.normalize();
+
+            // transform_stamped.transform.rotation.x = q.x();
+            // transform_stamped.transform.rotation.y = q.y();
+            // transform_stamped.transform.rotation.z = q.z();
+            // transform_stamped.transform.rotation.w = q.w();
+
+            // br.sendTransform(transform_stamped);
 
             r++;
 
